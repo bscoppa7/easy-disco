@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Disco - Gestionale Discoteca</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="particles-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-music"></i>
+                <span>Easy Disco</span>
+            </div>
+
+            <div class="nav-center">
+                <div class="nav-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-capacity">0</span>
+                        <span class="stat-label">Capacità Totale</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="current-occupancy">0</span>
+                        <span class="stat-label">Presenze Attuali</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="occupancy-percentage">0%</span>
+                        <span class="stat-label">Occupazione</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <!-- Theme Toggle -->
+                <div class="theme-toggle-container">
+                    <span class="theme-label">
+                        <i class="fas fa-sun theme-icon-light"></i>
+                        Giorno
+                    </span>
+                    <label class="theme-toggle">
+                        <input type="checkbox" id="theme-toggle-input">
+                        <span class="toggle-slider">
+                            <span class="toggle-button">
+                                <i class="fas fa-sun toggle-icon-light"></i>
+                                <i class="fas fa-moon toggle-icon-dark"></i>
+                            </span>
+                        </span>
+                    </label>
+                    <span class="theme-label">
+                        <i class="fas fa-moon theme-icon-dark"></i>
+                        Notte
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <!-- Layout a tre colonne -->
+        <div class="dashboard-layout">
+            <!-- Sidebar Sinistra - Menu Navigazione -->
+            <aside class="sidebar-left">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-bars"></i> Menu</h3>
+                </div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-tab="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </button>
+                    <button class="nav-item" data-tab="cambusa">
+                        <i class="fas fa-utensils"></i>
+                        <span>Cambusa</span>
+                    </button>
+                    <button class="nav-item" data-tab="pr">
+                        <i class="fas fa-users"></i>
+                        <span>Gestione PR</span>
+                    </button>
+                    <button class="nav-item" data-tab="entrate-uscite">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Entrate & Uscite</span>
+                    </button>
+                    <button class="nav-item" data-tab="calendario">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Calendario Eventi</span>
+                    </button>
+                    <button class="nav-item" data-tab="rubrica">
+                        <i class="fas fa-address-book"></i>
+                        <span>Rubrica</span>
+                    </button>
+                    <button class="nav-item" data-tab="statistiche">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Statistiche</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Area Centrale - Contenuto Principale -->
+            <main class="main-content">
+                <!-- Home Content (Piantina) -->
+                <div class="content-section active" id="home-content">
+                    
+
+                    <!-- Floor Plan Container -->
+                    <div class="floor-plan-container">
+                        <div class="floor-plan">
+                            <!-- Interactive Zones -->
+                            <div class="zone dj-zone no-hover" data-zone="dj" data-occupied="1" data-total="1">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-headphones"></i>
+                                </div>
+                                <div class="zone-label">DJ BOOTH</div>
+                            </div>
+
+                            <div class="zone bar-main" data-zone="bar-main" data-occupied="8" data-total="15">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-cocktail"></i>
+                                </div>
+                                <div class="zone-label">ZONA CONSOLE</div>
+                            </div>
+
+                            <div class="zone bar-secondary" data-zone="bar-secondary" data-occupied="3" data-total="8">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-wine-glass"></i>
+                                </div>
+                                <div class="zone-label">Backstage</div>
+                            </div>
+
+                            <div class="zone dance-floor" data-zone="dance-floor" data-occupied="45" data-total="80">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                                <div class="zone-label">PISTA</div>
+                            </div>
+
+                            <div class="zone vip-area" data-zone="vip" data-occupied="12" data-total="20">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="zone-label">AREA VIP</div>
+                            </div>
+
+                            <div class="zone tables-area" data-zone="tables" data-occupied="24" data-total="40">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-chair"></i>
+                                </div>
+                                <div class="zone-label">ZONA TAVOLI 1</div>
+                            </div>
+
+                            <div class="zone lounge-area" data-zone="lounge" data-occupied="15" data-total="25">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-smoking"></i>   
+                                </div>
+                                <div class="zone-label">BAR</div>
+                            </div>
+
+                            <div class="zone smoking-area" data-zone="smoking" data-occupied="6" data-total="15">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-couch"></i>
+                                </div>
+                                <div class="zone-label">ZONA TAVOLI 2</div>
+                            </div>
+
+                            <div class="zone entrance no-hover" data-zone="entrance" data-occupied="0" data-total="0">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-door-open"></i>
+                                </div>
+                                <div class="zone-label">INGRESSO</div>
+                            </div>
+
+                            <div class="zone restrooms no-hover" data-zone="restrooms" data-occupied="4" data-total="8">
+                                <div class="zone-indicator">
+                                    <i class="fas fa-restroom"></i>
+                                </div>
+                                <div class="zone-label">WC</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cambusa Section -->
+                <div class="content-section" id="cambusa-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-utensils"></i> Gestione Cambusa</h2>
+                        <p>Inventario bar e cucina</p>
+                    </div>
+
+                    <!-- Cambusa Dashboard -->
+                    <div class="cambusa-dashboard">
+                        <!-- Stats Cards -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-wine-bottle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-products">0</h3>
+                                    <p>Prodotti Totali</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="low-stock">0</h3>
+                                    <p>Scorte Basse</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-value">€0</h3>
+                                    <p>Valore Inventario</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="pending-orders">0</h3>
+                                    <p>Ordini Pendenti</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="cambusa-main">
+                            <!-- Categories Tabs -->
+                            <div class="category-tabs">
+                                <button class="category-tab active" data-category="all">
+                                    <i class="fas fa-th-large"></i>
+                                    <span>Tutti</span>
+                                </button>
+                                <button class="category-tab" data-category="spirits">
+                                    <i class="fas fa-wine-bottle"></i>
+                                    <span>Alcolici</span>
+                                </button>
+                                <button class="category-tab" data-category="beverages">
+                                    <i class="fas fa-glass-water"></i>
+                                    <span>Bevande</span>
+                                </button>
+                                <button class="category-tab" data-category="snacks">
+                                    <i class="fas fa-cookie-bite"></i>
+                                    <span>Snack</span>
+                                </button>
+                                <button class="category-tab" data-category="supplies">
+                                    <i class="fas fa-box"></i>
+                                    <span>Forniture</span>
+                                </button>
+                            </div>
+
+                            <!-- Search and Actions -->
+                            <div class="search-actions">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="product-search" placeholder="Cerca prodotti...">
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary" id="add-product-btn">
+                                        <i class="fas fa-plus"></i>
+                                        Aggiungi Prodotto
+                                    </button>
+                                    <button class="btn btn-secondary" id="export-btn">
+                                        <i class="fas fa-download"></i>
+                                        Esporta
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Products Table -->
+                            <div class="products-table-container">
+                                <table class="products-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Prodotto</th>
+                                            <th>Categoria</th>
+                                            <th>Quantità</th>
+                                            <th>Prezzo</th>
+                                            <th>Valore</th>
+                                            <th>Stato</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="products-tbody">
+                                        <!-- Products will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="pr-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-users"></i> Gestione PR</h2>
+                        <p>Gestione promoter e liste ospiti</p>
+                    </div>
+
+                    <!-- PR Dashboard -->
+                    <div class="pr-dashboard">
+                        <!-- Stats Cards -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-pr">0</h3>
+                                    <p>PR Attivi</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-list-ul"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-guests">0</h3>
+                                    <p>Ospiti in Lista</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="confirmed-guests">0</h3>
+                                    <p>Confermati Stasera</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-commissions">€0</h3>
+                                    <p>Commissioni Mese</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="pr-main">
+                            <!-- Section Tabs -->
+                            <div class="pr-tabs">
+                                <button class="pr-tab active" data-section="pr-list">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>PR & Promoter</span>
+                                </button>
+                                <button class="pr-tab" data-section="guest-list">
+                                    <i class="fas fa-list-ul"></i>
+                                    <span>Liste Ospiti</span>
+                                </button>
+                                <button class="pr-tab" data-section="commissions">
+                                    <i class="fas fa-calculator"></i>
+                                    <span>Commissioni</span>
+                                </button>
+                            </div>
+
+                            <!-- PR List Section -->
+                            <div class="pr-section active" id="pr-list-section">
+                                <div class="section-header">
+                                    <h3>PR & Promoter</h3>
+                                    <button class="btn btn-primary" id="add-pr-btn">
+                                        <i class="fas fa-plus"></i>
+                                        Aggiungi PR
+                                    </button>
+                                </div>
+
+                                <div class="pr-grid" id="pr-grid">
+                                    <!-- PR cards will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Guest List Section -->
+                            <div class="pr-section" id="guest-list-section">
+                                <div class="section-header">
+                                    <h3>Liste Ospiti</h3>
+                                    <div class="header-actions">
+                                        <select id="pr-filter" class="filter-select">
+                                            <option value="all">Tutti i PR</option>
+                                        </select>
+                                        <button class="btn btn-primary" id="add-guest-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Aggiungi Ospite
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="guests-table-container">
+                                    <table class="guests-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Telefono</th>
+                                                <th>PR</th>
+                                                <th>Persone</th>
+                                                <th>Stato</th>
+                                                <th>Data</th>
+                                                <th>Azioni</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="guests-tbody">
+                                            <!-- Guests will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Commissions Section -->
+                            <div class="pr-section" id="commissions-section">
+                                <div class="section-header">
+                                    <h3>Commissioni</h3>
+                                    <div class="header-actions">
+                                        <select id="month-filter" class="filter-select">
+                                            <option value="current">Mese Corrente</option>
+                                            <option value="last">Mese Scorso</option>
+                                        </select>
+                                        <button class="btn btn-secondary" id="export-commissions-btn">
+                                            <i class="fas fa-download"></i>
+                                            Esporta
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="commissions-table-container">
+                                    <table class="commissions-table">
+                                        <thead>
+                                            <tr>
+                                                <th>PR</th>
+                                                <th>Ospiti Portati</th>
+                                                <th>Commissione/Ospite</th>
+                                                <th>Totale</th>
+                                                <th>Stato</th>
+                                                <th>Azioni</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="commissions-tbody">
+                                            <!-- Commissions will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="entrate-uscite-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-exchange-alt"></i> Entrate & Uscite</h2>
+                        <p>Gestione flussi di cassa</p>
+                    </div>
+
+                    <!-- Finance Dashboard -->
+                    <div class="finance-dashboard">
+                        <!-- Stats Cards -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-income">€0</h3>
+                                    <p>Entrate Mese</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-expenses">€0</h3>
+                                    <p>Uscite Mese</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="net-balance">€0</h3>
+                                    <p>Bilancio Netto</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="daily-average">€0</h3>
+                                    <p>Media Giornaliera</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="finance-main">
+                            <!-- Finance Tabs -->
+                            <div class="finance-tabs">
+                                <button class="finance-tab active" data-section="transactions">
+                                    <i class="fas fa-list"></i>
+                                    <span>Transazioni</span>
+                                </button>
+                                <button class="finance-tab" data-section="categories">
+                                    <i class="fas fa-tags"></i>
+                                    <span>Categorie</span>
+                                </button>
+                                <button class="finance-tab" data-section="reports">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Report</span>
+                                </button>
+                            </div>
+
+                            <!-- Transactions Section -->
+                            <div class="finance-section active" id="transactions-section">
+                                <div class="section-header">
+                                    <h3>Transazioni</h3>
+                                    <div class="header-actions">
+                                        <select id="transaction-filter" class="filter-select">
+                                            <option value="all">Tutte</option>
+                                            <option value="income">Solo Entrate</option>
+                                            <option value="expense">Solo Uscite</option>
+                                        </select>
+                                        <button class="btn btn-primary" id="add-transaction-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Nuova Transazione
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="transactions-table-container">
+                                    <table class="transactions-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Descrizione</th>
+                                                <th>Categoria</th>
+                                                <th>Tipo</th>
+                                                <th>Importo</th>
+                                                <th>Azioni</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="transactions-tbody">
+                                            <!-- Transactions will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Categories Section -->
+                            <div class="finance-section" id="categories-section">
+                                <div class="section-header">
+                                    <h3>Categorie</h3>
+                                    <button class="btn btn-primary" id="add-category-btn">
+                                        <i class="fas fa-plus"></i>
+                                        Nuova Categoria
+                                    </button>
+                                </div>
+
+                                <div class="categories-grid" id="categories-grid">
+                                    <!-- Categories will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Reports Section -->
+                            <div class="finance-section" id="reports-section">
+                                <div class="section-header">
+                                    <h3>Report Mensili</h3>
+                                    <select id="month-report-filter" class="filter-select">
+                                        <option value="current">Mese Corrente</option>
+                                        <option value="last">Mese Scorso</option>
+                                    </select>
+                                </div>
+
+                                <div class="reports-grid">
+                                    <div class="report-card">
+                                        <h4>Entrate per Categoria</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-pie"></i>
+                                            <p>Grafico in sviluppo</p>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <h4>Uscite per Categoria</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-donut"></i>
+                                            <p>Grafico in sviluppo</p>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <h4>Trend Mensile</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-line"></i>
+                                            <p>Grafico in sviluppo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="calendario-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-calendar-alt"></i> Calendario Eventi</h2>
+                        <p>Pianificazione e organizzazione eventi</p>
+                    </div>
+
+                    <!-- Calendar Dashboard -->
+                    <div class="calendar-dashboard">
+                        <!-- Stats Cards -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-events">0</h3>
+                                    <p>Eventi Totali</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="upcoming-events">0</h3>
+                                    <p>Prossimi Eventi</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-attendees">0</h3>
+                                    <p>Partecipanti Totali</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="featured-events">0</h3>
+                                    <p>Eventi Speciali</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="calendar-main">
+                            <!-- Calendar Tabs -->
+                            <div class="calendar-tabs">
+                                <button class="calendar-tab active" data-section="calendar-view">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Calendario</span>
+                                </button>
+                                <button class="calendar-tab" data-section="events-list">
+                                    <i class="fas fa-list"></i>
+                                    <span>Lista Eventi</span>
+                                </button>
+                                <button class="calendar-tab" data-section="planning">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>Planning</span>
+                                </button>
+                            </div>
+
+                            <!-- Calendar View Section -->
+                            <div class="calendar-section active" id="calendar-view-section">
+                                <div class="section-header">
+                                    <h3>Calendario</h3>
+                                    <div class="header-actions">
+                                        <button class="btn btn-secondary" id="prev-month-btn">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <span id="current-month">Gennaio 2024</span>
+                                        <button class="btn btn-secondary" id="next-month-btn">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                        <button class="btn btn-primary" id="add-event-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Nuovo Evento
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="calendar-grid" id="calendar-grid">
+                                    <!-- Calendar will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Events List Section -->
+                            <div class="calendar-section" id="events-list-section">
+                                <div class="section-header">
+                                    <h3>Lista Eventi</h3>
+                                    <div class="header-actions">
+                                        <select id="event-status-filter" class="filter-select">
+                                            <option value="all">Tutti gli Stati</option>
+                                            <option value="planned">Pianificati</option>
+                                            <option value="confirmed">Confermati</option>
+                                            <option value="cancelled">Cancellati</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="events-list" id="events-list">
+                                    <!-- Events will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Planning Section -->
+                            <div class="calendar-section" id="planning-section">
+                                <div class="section-header">
+                                    <h3>Planning & Checklist</h3>
+                                    <button class="btn btn-primary" id="add-task-btn">
+                                        <i class="fas fa-plus"></i>
+                                        Nuovo Task
+                                    </button>
+                                </div>
+
+                                <div class="planning-grid">
+                                    <div class="planning-card">
+                                        <h4>Task in Corso</h4>
+                                        <div class="task-list" id="active-tasks">
+                                            <!-- Active tasks will be populated by JavaScript -->
+                                        </div>
+                                    </div>
+                                    <div class="planning-card">
+                                        <h4>Task Completati</h4>
+                                        <div class="task-list" id="completed-tasks">
+                                            <!-- Completed tasks will be populated by JavaScript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="rubrica-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-address-book"></i> Rubrica Contatti</h2>
+                        <p>Database clienti e fornitori</p>
+                    </div>
+
+                    <!-- Contacts Dashboard -->
+                    <div class="contacts-dashboard">
+                        <!-- Stats Cards -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-contacts">0</h3>
+                                    <p>Contatti Totali</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="vip-contacts">0</h3>
+                                    <p>Clienti VIP</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="suppliers-count">0</h3>
+                                    <p>Fornitori</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="new-contacts">0</h3>
+                                    <p>Nuovi Questo Mese</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="contacts-main">
+                            <!-- Contacts Tabs -->
+                            <div class="contacts-tabs">
+                                <button class="contacts-tab active" data-section="all-contacts">
+                                    <i class="fas fa-users"></i>
+                                    <span>Tutti i Contatti</span>
+                                </button>
+                                <button class="contacts-tab" data-section="vip-clients">
+                                    <i class="fas fa-crown"></i>
+                                    <span>Clienti VIP</span>
+                                </button>
+                                <button class="contacts-tab" data-section="suppliers">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Fornitori</span>
+                                </button>
+                            </div>
+
+                            <!-- All Contacts Section -->
+                            <div class="contacts-section active" id="all-contacts-section">
+                                <div class="section-header">
+                                    <h3>Tutti i Contatti</h3>
+                                    <div class="header-actions">
+                                        <div class="search-box">
+                                            <i class="fas fa-search"></i>
+                                            <input type="text" id="contacts-search" placeholder="Cerca contatti...">
+                                        </div>
+                                        <button class="btn btn-primary" id="add-contact-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Nuovo Contatto
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="contacts-grid" id="contacts-grid">
+                                    <!-- Contacts will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- VIP Clients Section -->
+                            <div class="contacts-section" id="vip-clients-section">
+                                <div class="section-header">
+                                    <h3>Clienti VIP</h3>
+                                    <button class="btn btn-primary" id="add-vip-btn">
+                                        <i class="fas fa-crown"></i>
+                                        Aggiungi VIP
+                                    </button>
+                                </div>
+
+                                <div class="vip-grid" id="vip-grid">
+                                    <!-- VIP clients will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Suppliers Section -->
+                            <div class="contacts-section" id="suppliers-section">
+                                <div class="section-header">
+                                    <h3>Fornitori</h3>
+                                    <button class="btn btn-primary" id="add-supplier-btn">
+                                        <i class="fas fa-truck"></i>
+                                        Nuovo Fornitore
+                                    </button>
+                                </div>
+
+                                <div class="suppliers-table-container">
+                                    <table class="suppliers-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Azienda</th>
+                                                <th>Contatto</th>
+                                                <th>Categoria</th>
+                                                <th>Telefono</th>
+                                                <th>Email</th>
+                                                <th>Stato</th>
+                                                <th>Azioni</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="suppliers-tbody">
+                                            <!-- Suppliers will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="statistiche-content">
+                    <div class="content-header">
+                        <h2><i class="fas fa-chart-bar"></i> Statistiche & Analytics</h2>
+                        <p>Report e analisi dati</p>
+                    </div>
+
+                    <!-- Statistics Dashboard -->
+                    <div class="statistics-dashboard">
+                        <!-- KPI Cards -->
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="kpi-info">
+                                    <h3 id="revenue-growth">+15%</h3>
+                                    <p>Crescita Ricavi</p>
+                                    <span class="kpi-trend positive">↗ vs mese scorso</span>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="kpi-info">
+                                    <h3 id="avg-attendance">245</h3>
+                                    <p>Presenze Medie</p>
+                                    <span class="kpi-trend positive">↗ +12% vs mese scorso</span>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="kpi-info">
+                                    <h3 id="avg-spending">€45</h3>
+                                    <p>Spesa Media</p>
+                                    <span class="kpi-trend negative">↘ -3% vs mese scorso</span>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="kpi-info">
+                                    <h3 id="satisfaction">4.7</h3>
+                                    <p>Soddisfazione</p>
+                                    <span class="kpi-trend positive">↗ +0.2 vs mese scorso</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="statistics-main">
+                            <!-- Statistics Tabs -->
+                            <div class="statistics-tabs">
+                                <button class="statistics-tab active" data-section="overview">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Overview</span>
+                                </button>
+                                <button class="statistics-tab" data-section="financial">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <span>Finanziari</span>
+                                </button>
+                                <button class="statistics-tab" data-section="customers">
+                                    <i class="fas fa-user-chart"></i>
+                                    <span>Clienti</span>
+                                </button>
+                                <button class="statistics-tab" data-section="operations">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Operazioni</span>
+                                </button>
+                            </div>
+
+                            <!-- Overview Section -->
+                            <div class="statistics-section active" id="overview-section">
+                                <div class="section-header">
+                                    <h3>Panoramica Generale</h3>
+                                    <select id="overview-period" class="filter-select">
+                                        <option value="week">Ultima Settimana</option>
+                                        <option value="month">Ultimo Mese</option>
+                                        <option value="quarter">Ultimo Trimestre</option>
+                                        <option value="year">Ultimo Anno</option>
+                                    </select>
+                                </div>
+
+                                <div class="charts-grid">
+                                    <div class="chart-card large">
+                                        <h4>Trend Ricavi</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-area"></i>
+                                            <p>Grafico trend ricavi in sviluppo</p>
+                                        </div>
+                                    </div>
+                                    <div class="chart-card">
+                                        <h4>Presenze per Giorno</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-bar"></i>
+                                            <p>Grafico presenze in sviluppo</p>
+                                        </div>
+                                    </div>
+                                    <div class="chart-card">
+                                        <h4>Zone più Popolari</h4>
+                                        <div class="chart-placeholder">
+                                            <i class="fas fa-chart-donut"></i>
+                                            <p>Grafico zone in sviluppo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Financial Section -->
+                            <div class="statistics-section" id="financial-section">
+                                <div class="section-header">
+                                    <h3>Statistiche Finanziarie</h3>
+                                    <select id="financial-period" class="filter-select">
+                                        <option value="month">Mensile</option>
+                                        <option value="quarter">Trimestrale</option>
+                                        <option value="year">Annuale</option>
+                                    </select>
+                                </div>
+
+                                <div class="financial-stats">
+                                    <div class="chart-placeholder">
+                                        <i class="fas fa-chart-line"></i>
+                                        <p>Dashboard finanziario in sviluppo</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Customers Section -->
+                            <div class="statistics-section" id="customers-section">
+                                <div class="section-header">
+                                    <h3>Analisi Clienti</h3>
+                                    <select id="customers-period" class="filter-select">
+                                        <option value="month">Mensile</option>
+                                        <option value="quarter">Trimestrale</option>
+                                    </select>
+                                </div>
+
+                                <div class="customers-stats">
+                                    <div class="chart-placeholder">
+                                        <i class="fas fa-users"></i>
+                                        <p>Analytics clienti in sviluppo</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Operations Section -->
+                            <div class="statistics-section" id="operations-section">
+                                <div class="section-header">
+                                    <h3>Statistiche Operative</h3>
+                                    <select id="operations-period" class="filter-select">
+                                        <option value="week">Settimanale</option>
+                                        <option value="month">Mensile</option>
+                                    </select>
+                                </div>
+
+                                <div class="operations-stats">
+                                    <div class="chart-placeholder">
+                                        <i class="fas fa-cogs"></i>
+                                        <p>Dashboard operativo in sviluppo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Sidebar Destra - Legenda e Info -->
+            <aside class="sidebar-right">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-info-circle"></i> Legenda</h3>
+                </div>
+
+                <!-- Legenda Occupazione -->
+                <div class="legend-compact">
+                    <h4>Occupazione Zone</h4>
+                    <div class="legend-items-compact">
+                        <div class="legend-item-compact">
+                            <div class="legend-color-compact" style="background: #10b981;"></div>
+                            <span>0-30% Libero</span>
+                        </div>
+                        <div class="legend-item-compact">
+                            <div class="legend-color-compact" style="background: #f59e0b;"></div>
+                            <span>31-70% Moderato</span>
+                        </div>
+                        <div class="legend-item-compact">
+                            <div class="legend-color-compact" style="background: #ef4444;"></div>
+                            <span>71-100% Pieno</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Rapide -->
+                <div class="quick-info">
+                    <h4>Info Rapide</h4>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="info-label">Ultimo Aggiornamento</span>
+                            <span class="info-value" id="last-update">--:--</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <div>
+                            <span class="info-label">Zona più Affollata</span>
+                            <span class="info-value" id="busiest-zone">--</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <span class="info-label">Zona più Libera</span>
+                            <span class="info-value" id="freest-zone">--</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Modern Tooltip -->
+        <div id="tooltip" class="modern-tooltip">
+            <div class="tooltip-header">
+                <i class="tooltip-icon"></i>
+                <span id="tooltip-zone"></span>
+            </div>
+            <div class="tooltip-body">
+                <div class="occupancy-info">
+                    <span id="tooltip-occupancy"></span>
+                </div>
+                <div class="occupancy-bar">
+                    <div class="occupancy-fill" id="tooltip-bar"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
